@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Breast Cancer Risk Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Hero Top Section -->
+        <header class="hero-section">
+            <span class="badge">Machine Learning Project</span>
+            <h1>Breast Cancer Risk Predictor</h1>
+            <p>An accessible AI screening tool using routine metabolic blood biomarkers.</p>
+            <a href="/detector" class="btn-hero">Detect Cancer Now →</a>
+        </header>
+
+        <!-- Informatory Cards Grid -->
+        <main class="info-grid">
+            <div class="info-card">
+                <h2>Project Overview</h2>
+                <p>Standard oncology diagnostics rely on invasive procedures or complex imaging. This project explores how interpretable Machine Learning algorithms can assist in early preliminary risk evaluation using standard, non-invasive clinical blood tests.</p>
+            </div>
+
+            <div class="info-card">
+                <h2>Data Source</h2>
+                <p>We utilized the open-source <strong>Breast Cancer Coimbra Dataset</strong> from the UCI Machine Learning Repository. It comprises 116 clinical patient records featuring 9 key metabolic indicators, including Fasting Glucose, Insulin, HOMA, Leptin, Adiponectin, Resistin, and MCP-1.</p>
+            </div>
+
+            <div class="info-card full-width">
+                <h2>Methodology & Model Tuning</h2>
+                <p>Our backend employs a <strong>DecisionTreeClassifier</strong> from Scikit-Learn. To optimize prediction reliability on small medical datasets, we implemented <strong>5-Fold Stratified Cross-Validation</strong> alongside <strong>GridSearchCV</strong> hyperparameter tuning to find optimal decision tree depths and split criteria.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Persistent Corner Credits -->
+    <div class="credits-corner">
+        <p><strong>Made by:</strong> Ganesh, Jayesh, Neil, & Sarthak</p>
+        <p>Dataset: <a href="https://archive.ics.uci.edu/dataset/451/breast+cancer+coimbra" target="_blank" rel="noopener noreferrer">UCI Machine Learning Repository</a></p>
+    </div>
+</body>
+</html>

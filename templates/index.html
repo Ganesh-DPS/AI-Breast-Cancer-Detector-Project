@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Risk Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-card">
+        <div class="top-nav">
+            <a href="/" class="btn-back">← Back to Overview</a>
+        </div>
+
+        <header class="app-header">
+            <span class="badge">AI Screening System</span>
+            <h1>Breast Cancer Risk Predictor</h1>
+            <p>Input patient metabolic markers to assess risk using Decision Trees.</p>
+        </header>
+
+        <form id="predictionForm" class="form-grid">
+            <div class="field">
+                <label for="Age">Age (years)</label>
+                <input type="number" step="any" id="Age" placeholder="e.g. 48" required>
+            </div>
+
+            <div class="field">
+                <label for="BMI">BMI (kg/m²)</label>
+                <input type="number" step="any" id="BMI" placeholder="e.g. 23.5" required>
+            </div>
+
+            <div class="field">
+                <label for="Glucose">Fasting Glucose (mg/dL)</label>
+                <input type="number" step="any" id="Glucose" placeholder="e.g. 92" required>
+            </div>
+
+            <div class="field">
+                <label for="Insulin">Insulin (µIU/mL)</label>
+                <input type="number" step="any" id="Insulin" placeholder="e.g. 3.4" required>
+            </div>
+
+            <div class="field">
+                <label for="HOMA">HOMA Index</label>
+                <input type="number" step="any" id="HOMA" placeholder="e.g. 0.77" required>
+            </div>
+
+            <div class="field">
+                <label for="Leptin">Leptin (ng/mL)</label>
+                <input type="number" step="any" id="Leptin" placeholder="e.g. 12.4" required>
+            </div>
+
+            <div class="field">
+                <label for="Adiponectin">Adiponectin (µg/mL)</label>
+                <input type="number" step="any" id="Adiponectin" placeholder="e.g. 10.5" required>
+            </div>
+
+            <div class="field">
+                <label for="Resistin">Resistin (ng/mL)</label>
+                <input type="number" step="any" id="Resistin" placeholder="e.g. 11.2" required>
+            </div>
+
+            <div class="field full-width">
+                <label for="MCP1">MCP-1 Level (pg/dL)</label>
+                <input type="number" step="any" id="MCP1" placeholder="e.g. 540.0" required>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-submit">Predict Cancer Risk</button>
+        </form>
+
+        <div id="resultCard" class="result-card hidden">
+            <h2 id="resultTitle"></h2>
+            <p id="resultDetails"></p>
+        </div>
+
+        <footer class="app-footer">
+            <div class="accuracy-wrapper">
+                <span class="accuracy-tag">5-Fold CV Accuracy: {{ accuracy }}</span>
+            </div>
+            <p class="disclaimer">
+                <strong>Disclaimer:</strong> This tool provides a preliminary AI-based risk assessment for educational purposes only and is not a clinical diagnosis. Please consult a qualified healthcare professional for medical advice and official screening.
+            </p>
+        </footer>
+    </div>
+
+    <!-- Persistent Corner Credits -->
+    <div class="credits-corner">
+        <p><strong>Made by:</strong> Ganesh, Jayesh, Neil, & Sarthak</p>
+        <p>Dataset: <a href="https://archive.ics.uci.edu/dataset/451/breast+cancer+coimbra" target="_blank" rel="noopener noreferrer">UCI Machine Learning Repository</a></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
