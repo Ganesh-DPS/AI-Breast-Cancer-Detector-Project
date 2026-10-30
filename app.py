@@ -9,22 +9,24 @@ app = Flask(__name__)
 model = None
 accuracy = "N/A"
 
-
 def train_decision_tree():
     global model, accuracy
-    csv_file = 'dataR2.csv'
-
+    
+    # Use absolute path to ensure Vercel finds dataR2.csv
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_file = os.path.join(base_dir, 'dataR2.csv')
+    
     if not os.path.exists(csv_file):
-        print(f"\n[!] ERROR: '{csv_file}' was not found in project directory.\n")
+        print(f"\n[!] ERROR: '{csv_file}' was not found.\n")
         return
 
     df = pd.read_csv(csv_file)
     df.columns = df.columns.str.strip()
     df = df.rename(columns={'MCP.1': 'MCP1', 'MCP-1': 'MCP1'})
-
+    
     if 'Classification' in df.columns:
         df['Classification'] = df['Classification'].map({1: 0, 2: 1})
-
+    
     X = df[['Age', 'BMI', 'Glucose', 'Insulin', 'HOMA', 'Leptin', 'Adiponectin', 'Resistin', 'MCP1']]
     y = df['Classification']
 
@@ -51,25 +53,15 @@ def train_decision_tree():
     accuracy = f"{best_cv_accuracy}%"
     model = grid_search.best_estimator_
 
-    print(f"Model trained! Best 5-Fold CV Accuracy: {accuracy}")
-
-
 train_decision_tree()
-
-
-# --- ROUTES ---
 
 @app.route('/')
 def home():
-    # Serves the landing/intro page
     return render_template('home.html')
-
 
 @app.route('/detector')
 def detector():
-    # Serves the detector input form page
     return render_template('index.html', accuracy=accuracy)
-
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -100,7 +92,6 @@ def predict():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
